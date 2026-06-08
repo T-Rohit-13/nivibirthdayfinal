@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday! 🎂❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HIDDEN AUDIO ELEMENTS ===== -->
+  <audio id="bg-music" loop></audio>
+  <audio id="photo-music"></audio>
+
+  <!-- ===== MUSIC TOGGLE BUTTON ===== -->
+  <button id="music-btn" class="music-btn" onclick="toggleMusic()" style="display:none;" title="Toggle Music">🎵</button>
+
+  <!-- ===== ADMIN TRIGGER (hidden corner tap) ===== -->
+  <div id="admin-trigger" onclick="showAdminLogin()" title="Admin"></div>
+
+  <!-- ================================================================
+       LANDING / SPLASH SCREEN
+  ================================================================= -->
+  <section id="landing">
+    <div id="particles-bg"></div>
+    <div class="landing-content">
+      <div class="landing-emoji">🎂</div>
+      <h1 id="landing-title">Happy Birthday! 🎂❤️</h1>
+      <p id="landing-subtitle">A little surprise made just for you ✨</p>
+      <button class="surprise-btn" onclick="openSurprise()">
+        Open Your Surprise 🎁
+      </button>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MAIN CONTENT (revealed after landing)
+  ================================================================= -->
+  <div id="main-content">
+
+    <!-- ── HERO QUOTE ── -->
+    <section class="section hero-section">
+      <div class="container">
+        <div class="glass-card quote-card reveal">
+          <div class="quote-decoration">❝</div>
+          <p id="main-quote" class="main-quote"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT HER ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">All About Her ✨</h2>
+        <div id="about-grid" class="about-grid"></div>
+      </div>
+    </section>
+
+    <!-- ── PERSONAL MESSAGE ── -->
+    <section class="section message-section">
+      <div class="container">
+        <h2 class="section-title reveal">A Message From The Heart 💌</h2>
+        <div class="glass-card message-card reveal">
+          <p id="personal-msg" class="message-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PHOTO GALLERY ── -->
+    <section class="section gallery-section">
+      <div class="container">
+        <h2 class="section-title reveal">Our Memories 📸</h2>
+
+        <!-- Featured Photo -->
+        <div id="featured-photo-container" class="featured-photo-container reveal" style="display:none;">
+          <img id="featured-img" src="" alt="Featured Memory" oncontextmenu="return false;" ondragstart="return false;" />
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="gallery-grid" class="gallery-grid"></div>
+        <div id="gallery-empty" class="empty-state" style="display:none;">
+          No photos added yet — come back soon! 🌸
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SPECIAL MEMORIES ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Special Memories 🌸</h2>
+        <div class="glass-card message-card reveal">
+          <p id="special-memories" class="message-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TIMELINE ── -->
+    <section class="section timeline-section">
+      <div class="container">
+        <h2 class="section-title reveal">Our Story So Far 📅</h2>
+        <div id="timeline" class="timeline"></div>
+        <div id="timeline-empty" class="empty-state" style="display:none;">
+          No timeline events added yet 🌷
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WISHES CAROUSEL ── -->
+    <section class="section wishes-section">
+      <div class="container">
+        <h2 class="section-title reveal">Birthday Wishes 🌟</h2>
+        <div class="carousel-wrapper reveal">
+          <button class="carousel-arrow left" onclick="moveCarousel(-1)">&#8592;</button>
+          <div class="carousel-viewport">
+            <div id="carousel-track" class="carousel-track"></div>
+          </div>
+          <button class="carousel-arrow right" onclick="moveCarousel(1)">&#8594;</button>
+        </div>
+        <div id="carousel-dots" class="carousel-dots"></div>
+      </div>
+    </section>
+
+    <!-- ── FUTURE WISHES ── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Wishes For Your Future 🌠</h2>
+        <div class="glass-card message-card reveal">
+          <p id="future-wishes" class="message-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SURPRISE GIFT BOX ── -->
+    <section class="section gift-section">
+      <div class="container">
+        <h2 class="section-title reveal">A Special Surprise 🎁</h2>
+        <div class="gift-wrapper reveal">
+          <div id="gift-box" class="gift-box" onclick="openGift()">
+            <div class="gift-lid">
+              <div class="gift-bow">🎀</div>
+            </div>
+            <div class="gift-body">
+              <span class="gift-emoji">🎁</span>
+            </div>
+            <p class="gift-hint">Tap to Open!</p>
+          </div>
+          <div id="gift-message" class="gift-message">
+            <p id="gift-text" class="message-text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FINAL MESSAGE ── -->
+    <section class="section final-section">
+      <div class="container">
+        <div class="glass-card final-card reveal">
+          <div class="final-emoji">💖</div>
+          <p id="final-message" class="final-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="site-footer">
+      <p id="footer-text">Made with ❤️</p>
+    </footer>
+
+  </div><!-- /#main-content -->
+
+  <!-- ================================================================
+       LIGHTBOX
+  ================================================================= -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+      <img id="lightbox-img" src="" alt="Memory" oncontextmenu="return false;" ondragstart="return false;" />
+      <div id="lightbox-info" class="lightbox-info" style="display:none;">
+        <span class="lightbox-music-icon">🎵</span>
+        <span id="lightbox-song-name"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       ADMIN LOGIN OVERLAY
+  ================================================================= -->
+  <div id="admin-login-overlay" class="overlay-backdrop">
+    <div class="modal-card">
+      <h3>🔐 Admin Login</h3>
+      <div class="admin-field">
+        <label>Password</label>
+        <input type="password" id="admin-password" placeholder="Enter password"
+               onkeydown="if(event.key==='Enter') submitAdminLogin()" />
+      </div>
+      <div id="login-error" class="login-error" style="display:none;">
+        ❌ Incorrect password. Try again.
+      </div>
+      <div class="modal-actions">
+        <button class="admin-btn admin-btn-primary" onclick="submitAdminLogin()">Login</button>
+        <button class="admin-btn" onclick="hideAdminLogin()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       ADMIN PANEL OVERLAY
+  ================================================================= -->
+  <div id="admin-panel-overlay" class="overlay-backdrop admin-panel-overlay">
+    <div class="admin-panel">
+
+      <!-- Panel Header -->
+      <div class="admin-header">
+        <h2>🎛️ Admin Panel</h2>
+        <div class="admin-header-actions">
+          <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="logoutAdmin()">Logout</button>
+          <button class="admin-btn admin-btn-sm" onclick="closeAdminPanel()">&times; Close</button>
+        </div>
+      </div>
+
+      <div class="admin-body">
+
+        <!-- SECTION: General Info -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">📝 General Info</h3>
+          <div class="admin-field">
+            <label>Friend's Name</label>
+            <input type="text" id="cfg-friend-name" placeholder="Nivi" />
+          </div>
+          <div class="admin-field">
+            <label>Landing Subtitle</label>
+            <input type="text" id="cfg-landing-subtitle" />
+          </div>
+          <div class="admin-field">
+            <label>Main Hero Quote</label>
+            <textarea id="cfg-main-quote" rows="3"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Personal Message 💌</label>
+            <textarea id="cfg-personal-msg" rows="5"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Special Memories 🌸</label>
+            <textarea id="cfg-special-memories" rows="5"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Future Wishes 🌠</label>
+            <textarea id="cfg-future-wishes" rows="5"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Gift Message 🎁</label>
+            <textarea id="cfg-gift-text" rows="4"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Final Emotional Message 💖</label>
+            <textarea id="cfg-final-message" rows="5"></textarea>
+          </div>
+        </div>
+
+        <!-- SECTION: Background Music -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">🎵 Background Music</h3>
+          <div class="admin-field">
+            <p id="cfg-bg-music-info" class="admin-info-text">No song uploaded — a built-in birthday melody will play 🎵</p>
+            <label>Upload Song (MP3 / OGG / WAV)</label>
+            <input type="file" accept="audio/*" onchange="uploadBgMusic(event)" />
+          </div>
+        </div>
+
+        <!-- SECTION: About Cards -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">💫 About Her Cards</h3>
+          <div id="cfg-about-container"></div>
+        </div>
+
+        <!-- SECTION: Birthday Wishes Carousel -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">🌟 Birthday Wishes</h3>
+          <div id="cfg-wishes-list"></div>
+          <button class="admin-btn admin-btn-primary" onclick="addNewWishConfigItem()" style="margin-top:0.8rem;">
+            + Add Wish
+          </button>
+        </div>
+
+        <!-- SECTION: Timeline Events -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">📅 Timeline Events</h3>
+          <div id="cfg-timeline-list"></div>
+          <button class="admin-btn admin-btn-primary" onclick="addNewTimelineConfigItem()" style="margin-top:0.8rem;">
+            + Add Event
+          </button>
+        </div>
+
+        <!-- SECTION: Gallery Photos -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">📸 Gallery Photos</h3>
+          <div class="admin-field">
+            <label>Upload Photos (multiple allowed)</label>
+            <input type="file" accept="image/*" multiple onchange="uploadGalleryPhotos(event)" />
+          </div>
+          <div id="cfg-photo-grid" class="admin-photo-grid"></div>
+        </div>
+
+        <!-- SECTION: Import / Export -->
+        <div class="admin-section">
+          <h3 class="admin-section-title">⚙️ Import / Export Config</h3>
+          <div class="admin-field">
+            <label>Import data.js</label>
+            <input type="file" accept=".js,.json" onchange="importConfig(event)" />
+          </div>
+          <button class="admin-btn" onclick="exportConfig()">
+            ⬇️ Export Config (data.js)
+          </button>
+        </div>
+
+      </div><!-- /.admin-body -->
+
+      <!-- Panel Footer Actions -->
+      <div class="admin-footer">
+        <button class="admin-btn admin-btn-primary admin-btn-lg" onclick="saveAllConfig()">
+          💾 Save All Changes
+        </button>
+        <button class="admin-btn admin-btn-lg" onclick="closeAdminPanel()">
+          Cancel
+        </button>
+      </div>
+
+    </div><!-- /.admin-panel -->
+  </div>
+
+  <!-- ================================================================
+       SCRIPTS — order: config → db → data → script
+  ================================================================= -->
+  <script src="config.js"></script>  <!-- ← Set your Railway URL here -->
+  <script src="db.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
